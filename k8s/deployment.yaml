@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medibook
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: medibook
+  template:
+    metadata:
+      labels:
+        app: medibook
+    spec:
+      containers:
+        - name: medibook
+          image: medibook:1.0          # local image; see README (minikube image load / kind load)
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: medibook-config
+          readinessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 20
+            periodSeconds: 10

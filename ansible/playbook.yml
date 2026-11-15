@@ -1,0 +1,6 @@
+---
+- name: Set up Medibook runtime
+  hosts: appservers
+  become: true
+  roles:
+    - medibook

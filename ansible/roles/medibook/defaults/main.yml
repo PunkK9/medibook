@@ -1,0 +1,6 @@
+---
+app_port: 8080
+app_dir: /opt/medibook
+app_user: medibook
+jar_src: "{{ playbook_dir }}/../target/medibook.jar"
+app_message: "Medibook deployed by Ansible"
