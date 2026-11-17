@@ -4,6 +4,7 @@ pipeline {
     tools { maven 'Maven3'; jdk 'JDK17' }   // names configured in Manage Jenkins > Tools
 
     options { disableConcurrentBuilds() }
+triggers { pollSCM("H/2 * * * *") }
 
     environment {
         IMAGE = "medibook"
